@@ -1,0 +1,51 @@
+name: Build LaTeX Document
+
+on:
+  push:
+    branches:
+      - main   # adjust to your default branch; prevents tag-push loops
+
+permissions:
+  contents: write # needed to create releases
+
+jobs:
+  build_latex:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout the repository
+      - name: Set up Git repository
+        uses: actions/checkout@v4
+
+      # Step 2: Install TeX Live
+      - name: Install TeX Live
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y texlive-full
+
+      # Step 3: Compile LaTeX document with pdflatex
+      - name: Compile LaTeX document
+        run: |
+          pdflatex ICHEP_2026_Talk_Paper.tex
+          pdflatex ICHEP_2026_Talk_Paper.tex
+
+      # Step 4: Upload the generated PDF as an artifact
+      - name: Upload PDF file
+        uses: actions/upload-artifact@v4
+        with:
+          name: ICHEP_2026_Talk_Paper
+          path: ICHEP_2026_Talk_Paper.pdf
+
+      # Step 5: Create the GitHub Release and attach the PDF
+      - name: Create GitHub Release (with asset)
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: v${{ github.run_number }}
+          name: Release ${{ github.run_number }}
+          body: |
+            Release triggered by commit:
+            ${{ github.event.head_commit.message }}
+          files: |
+            ICHEP_2026_Talk_Paper.pdf
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
