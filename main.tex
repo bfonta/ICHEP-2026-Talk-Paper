@@ -1,0 +1,71 @@
+\documentclass[a4paper,11pt]{article}
+\usepackage{pos}
+\usepackage{lineno} % for line numbers
+\linenumbers % for line numbers
+%
+\title{Revolutionizing the CMS High-Level Trigger System at HL-LHC with Next Generation Triggers}
+
+\author*[a]{Bruno Alves}
+
+\affiliation[a]{CERN, 1211 Geneva 23, Switzerland}
+
+\emailAdd{bruno.alves@cern.ch}
+
+\abstract{The Next Generation Triggers (NGT) project aims to research and develop new ideas and technologies for the experiment trigger systems at the HL-LHC and beyond.
+  A central component of this effort is the expansion of the CMS High-Level Trigger (HLT) system towards a novel data-scouting paradigm, where all the events accepted by the Level-1 trigger are reconstructed and recorded in a high-level, storage-efficient format suitable for prompt physics analysis.
+  The R$^{3}$ (Real-time Reconstruction Revolution) program addresses this challenge by fundamentally rethinking the HLT event reconstruction to deliver offline-quality performance while operating within the critical processing and storage capacity constraints of the system.
+  Advanced algorithms optimized for heterogeneous computing architectures, including GPUs and distributed accelerators, combined with a reorganization of data structures, will be incorporated to significantly reduce processing time.
+  With only a single opportunity to reconstruct each event, an integrated real-time calibration loop will perform on-the-fly derivation of optimal calibration constants, enabling in-situ calibration of newly acquired data.
+  The output format will be strategically tuned to provide sufficient detail for comprehensive physics analyses while minimizing data volume.
+  This contribution will cover the latest developments and validation studies to establish the feasibility and physics potential of the innovative NGT scouting approach in CMS.}
+
+\FullConference{43rd International Conference on High Energy Physics (ICHEP 2026)\\
+30 July  to 5 August , 2026\\
+Natal, Brazil\\}
+
+%% \tableofcontents
+
+\begin{document}
+\maketitle
+
+
+\section{The NGT Concept at HLT in the CMS Detector}
+%
+Text
+%
+\section{Pixel Tracking Acceleration}
+%
+Text
+%
+\section{Results}
+%
+Text
+%
+\section{Conclusions}
+%
+Text
+%
+\begin{thebibliography}{99}
+\bibitem{cms}
+  The CMS Collaboration. ``The CMS Experiment at the CERN LHC''. In: JINST 3 (2008), S08004. DOI: \url{10.1088/1748-0221/3/08/S08004}.
+\bibitem{ngt}
+  Next Generation Triggers. (2026). NGT Evaluation Report - 2025. CERN. DOI: \url{https://doi.org/10.17181/dvqah-g0f70}
+\bibitem{trackerphase2}
+  The CMS Collaboration, ``The Phase-2 Upgrade of the CMS Tracker''. \url{https://cds.cern.ch/record/2272264}
+\bibitem{ngtdps}
+  The CMS Collaboration, ``Computing and physics performance of a high-throughput NGT Scouting stream for the HLT Phase-2 Upgrade''. \url{https://cds.cern.ch/record/2956836}
+\bibitem{octdr}
+  The CMS Collaboration, ``CMS Offline Software and Computing for HL-LHC, Conceptual Design Report''. \url{https://cds.cern.ch/record/2957472}
+\bibitem{demonstrator}
+  The CMS Collaboration, ``Next Generation Triggers Demonstrator: Time Variation of the Calibrations and System Monitoring''. \url{https://cds.cern.ch/record/2950076}
+\bibitem{muonphase2}
+  The CMS Collaboration, ``Muon Tracking at the CMS High-Level Trigger for the HL-LHC Upgrade''. \url{https://cds.cern.ch/record/2950077}
+\bibitem{scout}
+  The CMS Collaboration, ``Enriching the physics program of the CMS experiment via data scouting and data parking''. Physics Reports Volume 1115, 17 April 2025, Pages 678-772. \url{https://doi.org/10.1016/j.physrep.2024.09.006}
+\bibitem{ckf}
+  R. Mankel. ``A concurrent track evolution algorithm for pattern recognition in the HERA-B main tracking system''. Nucl. Instrum. Methods A395 (1997) 169. \url{https://doi.org/10.1016/S0168-9002(97)00705-5}
+\bibitem{patatrack}
+  A. Bocci et al. ``Heterogeneous Reconstruction of Tracks and Primary Vertices With the CMS Pixel Tracker''. Frontiers in Big Data Volume 3 - 2020 (2020). issn: 2624-909X. DOI: \url{10.3389/fdata.2020.601728}. url: ht\url{tps://arxiv.org/abs/2008.13461}.
+\end{thebibliography}
+
+\end{document}
