@@ -5,7 +5,7 @@
 %
 \title{Revolutionizing the CMS High-Level Trigger System at HL-LHC with Next Generation Triggers}
 
-\author*[a]{Bruno Alves}
+\author*[a]{Bruno Alves\orcidlink{0000-0001-9752-0624}, on behalf of the CMS collaboration\footnote{Copyright 2026 CERN for the benefit of the CMS Collaboration. Reproduction of this article or parts of it is allowed as specified in the CC-BY-4.0 license.}}
 
 \affiliation[a]{CERN, 1211 Geneva 23, Switzerland}
 
@@ -29,9 +29,53 @@ Natal, Brazil\\}
 \maketitle
 
 
-\section{The NGT Concept at HLT in the CMS Detector}
+\section{The NGT Scouting Stream at the HL-LHC}
+\label{intro}
 %
-Text
+COPIED FROM CHEP \par
+%
+The two-tiered online selection of LHC data by the Level-1 Trigger (L1T) and the High-Level Trigger (HLT) at the Compact Muon Solenoid (CMS) experiment \cite{cms} is essential to reduce the \SI{40}{\mega\hertz} LHC bunch-crossing rate to a bandwidth and storage footprint that is sustainable for offline processing and analysis.
+The L1T acts as the first filtering stage and has access to only a limited, coarse-grained detector readout; in Phase~2, it will operate with a fixed latency of \SI{12.5}{\micro\second} per event.
+This is followed by the HLT, which only runs on the events accepted by the L1T, and has access to the full detector readout, operating with an average processing-time budget of the order of \SI{1}{\second} per event in Phase~2.
+Despite the overwhelming reduction of data rate between these two stages, the trigger system provides an efficient online selection of rare physics processes. \par
+%
+Innovative trigger strategies have been employed in CMS since its inception, and quite intensely during Run~3~\cite{scout}.
+One such strategy, \textit{data parking}, addresses the limited availability of prompt computing resources by storing the raw data while deferring the full reconstruction until resources are again available.
+Another strategy, \textit{data scouting}, which this work discusses, addresses both storage and computing limitations by reconstructing events collected by related scouting streams only up to HLT level.
+The resulting scouting output is a reduced analysis-ready data format which bypasses the offline reconstruction.
+These strategies enable a significant reduction of trigger thresholds with respect to the standard data stream, and thus the exploration of phase-space regions otherwise inaccessible, at the cost of a degradation in the resolution of physics objects. \par
+%
+The High-Luminosity LHC (HL-LHC) is scheduled to start taking data in 2030, reaching unprecedented instantaneous luminosities of \sm\SI{7.5e34}{\per\square\centi\meter\per\second}, corresponding to a \sm3.5 times increase over peak Run~3 conditions, and an average pileup of 200, compared to \sm60 in Run~3.
+Many CMS subdetectors will undergo significant upgrades, ranging from electronics-only updates, as for the barrel electromagnetic calorimeter, to complete overhauls, as will be the case for the endcap calorimeter.
+The trigger system will therefore have to operate in an extremely challenging environment, driven by the overall increase in detector data volume and event complexity.
+Data scouting and parking techniques will be extensively explored and expanded during the HL-LHC era \cite{scout}. \par
+%
+The Next-Generation Trigger (NGT) project~\cite{ngt} aims to extend the physics reach of CMS beyond what is achievable with the baseline Phase~2 trigger system, by making lightweight, offline-like reconstructed objects available in real time.
+One of its main goals is to pursue a next-generation scouting strategy targeting the largest ever recorded scouting bandwidth, while improving on the intrinsically lower per-object precision associated with scouting-quality reconstruction.
+This builds on the demonstrated success of scouting techniques since their introduction in CMS, and their considerable expansion during Run~3 \cite{scout}.
+Concretely, the goal within NGT is to reconstruct \emph{all} events accepted by the L1T, at \SI{750}{\kilo\hertz}, and record them in a compact, analysis-ready \texttt{NanoAOD}-like data format, via a dedicated NGT Scouting stream (see Fig.~\ref{fig:concept}).
+The baseline scouting strategy, instead, is currently aiming for a \SI{225}{\kilo\hertz} rate~\cite{octdr}, corresponding to \SI{\sim 70}{\percent} less than the NGT proposal.
+As an additional comparison, the standard HLT approach (also in Fig.~\ref{fig:concept}), which consists of selecting high-interest events and writing out the full raw detector data for later offline analysis, is planned to work at \SI{\sim 15}{\kilo\hertz}.
+Attaining a scouting stream at \SI{750}{\kilo\hertz} requires both the development of new reconstruction algorithms and the redesign of existing ones, so that the resulting throughput remains within constraints, in terms of compute, storage, and, ultimately, cost.
+As part of this effort, the target fractions of the HLT code to be offloaded to GPUs are 50\% (80\%) by the start of Run~4 (Run~5)~\cite{hlttdr}. \par
+%
+\begin{figure}[h]
+\centering
+\includegraphics[width=1.\textwidth]{ngtconcept}
+\caption{Simplified schematic overview of the trigger processing chain in CMS during Phase~2, from the collision rate at the HL-LHC with 200 PU to the final analysis step.
+  Both the HLT Standard and the NGT Scouting paths are shown, with current expected rates and throughput values.
+  The HLT Standard approach selects high-interest events at \SI{\sim 15}{\kilo\hertz} and writes out the full detector raw data for later offline analysis.
+  The NGT Scouting path reconstructs all events accepted by the L1T at \SI{750}{\kilo\hertz}, with no additional filtering, and stores the events directly in a compact, analysis-ready \texttt{NanoAOD}-like data format.}
+\label{fig:concept}
+\end{figure}
+%
+NGT also plans to innovate on how calibrations are performed at the HLT.
+In CMS, different calibration constants need to be updated at different frequencies, ranging from minutes to weeks.
+While offline calibration workflows are typically allowed to take up to 48 hours, their online counterparts must be derived much faster, introducing additional algorithmic and operational challenges.
+NGT is currently developing a real-time calibration strategy for the HLT that targets a resolution comparable to what is achieved offline.
+This idea builds on a demonstrator system which buffers $\sim$1\% of the data stream and applies improved calibrations before the HLT reconstruction, successfully operated during Run~3 \cite{demonstrator}. \par
+%
+The remainder of this work focuses on two of the key algorithmic developments that will help the NGT Scouting stream to approach an offline-quality reconstruction: the extension to the Outer Tracker and GPU-based acceleration of the pixel-based tracking reconstruction algorithm (Sec.~\ref{sec:track}), and the redesign of the HLT muon reconstruction chain (Sec.~\ref{sec:muon}).
 %
 \section{Pixel Tracking Acceleration}
 %
@@ -42,8 +86,21 @@ Text
 Text
 %
 \section{Conclusions}
+\label{sec:conclusions}
 %
-Text
+COPIED FROM CHEP \par
+%
+This work presents the ambitious NGT scouting strategy for the HLT system of CMS during the HL-LHC phase, introducing its challenges and some of the techniques used to make it possible.
+In particular, we discuss substantial improvements of the online reconstruction chain of tracks and muons, in terms of physics and computing performance.
+Tracking has historically been the largest contributor to execution time in the CMS HLT reconstruction, due to the extremely high channel count, which will be further increased for the HL-LHC.
+While achieving a clear reduction in processing time, the presented pixel tracking results remain competitive with full tracking.
+The same positive behaviour is also present in the HLT muon reconstruction, where several improvements are leading to faster algorithms without strongly impacting physics performance.
+Current and future studies are being undertaken to further enhance existing algorithms, which should lead to a speed and efficiency increase in the next few years. \par
+%
+The ultimate goal for HL-LHC reconstruction in CMS is to achieve performance that matches or exceeds current capabilities, while simultaneously attaining the execution speed needed to turn the NGT scouting strategy into reality.
+In the case of pixel tracking, this requires at least matching the performance currently delivered by full track reconstruction.
+Should NGT scouting at \SI{750}{\kilo\hertz} prove to be too ambitious, the proposed improvements can still be integrated into the standard High-Level Trigger (HLT) reconstruction sequence or adapted for the more conservative HLT scouting approach planned at \SI{225}{\kilo\hertz} \cite{octdr}.
+Given existing similarities, the NGT improvements are also expected to benefit the offline reconstruction chain. \par
 %
 \begin{thebibliography}{99}
 \bibitem{cms}
